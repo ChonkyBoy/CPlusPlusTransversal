@@ -1,12 +1,18 @@
 #include <iostream>
 #include <vector>
 #include <random>
-
+#include <stdlib.h>
+#include <time.h>
+#include <bits/stdc++.h>
+#include <algorithm>
+#include <random>
 
 using namespace std;
 
 
-
+int shuffle(int r) {
+    return rand() % r;
+}
 
 class Carte {
 private:
@@ -116,5 +122,7 @@ int main() {
          */
         Purple *purple = new Purple();
         purple->afficherPaquet();
+    random_shuffle(purple->afficherPaquet());
+
     return 0;
 }
