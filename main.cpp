@@ -1,6 +1,5 @@
 #include <iostream>
 #include <vector>
-#include <random>
 #include <stdlib.h>
 #include <time.h>
 #include <bits/stdc++.h>
@@ -19,10 +18,9 @@
 
 using namespace std;
 
-
-int shuffle(int r) {
+/*int shuffle(int r) {
     return rand() % r;
-}
+}*/
 
 class Carte {
 private:
@@ -31,38 +29,47 @@ private:
     string couleur;
 public:
     Carte(int chiffre, string signe, string couleur) {
-        this -> chiffre = chiffre;
-        this -> signe = signe;
-        this -> couleur = couleur;
+        this->chiffre = chiffre;
+        this->signe = signe;
+        this->couleur = couleur;
     }
+    int get_chiffre() { return this->chiffre; };
+    void set_chiffre(int chiffre) { this->chiffre = chiffre; };
+
+    string get_signe() { return this->signe; };
+    void set_signe(string signe) { this->signe = signe;};
+
+    string get_couleur() { return this->couleur; };
+    void set_couleur(string couleur) { this->couleur = couleur; };
+
+    void toString(){
+        cout << this->signe << this->chiffre << this->couleur << endl;
+    }
+
     void afficher() {
         if (chiffre == 13) {
             cout << "Voici les cartes :" << " roi" << " de " << this->signe << endl;
-        }
-        else if (chiffre == 12) {
+        } else if (chiffre == 12) {
             cout << "Voici les cartes :" << " dame" << " de " << this->signe << endl;
-        }
-        else if (chiffre == 11) {
+        } else if (chiffre == 11) {
             cout << "Voici les cartes :" << " valet" << " de " << this->signe << endl;
-        }
-        else if (chiffre == 1) {
+        } else if (chiffre == 1) {
             cout << "Voici les cartes :" << " as" << " de " << this->signe << endl;
-        }
-        else {
+        } else {
             cout << "Voici les cartes : " << this->chiffre << " de " << this->signe << endl;
         }
     }
 };
 
-//
+
 
 class Purple {
 private:
-    vector<Carte*> paquetCarte;
+    vector<Carte *> paquetCarte;
 public:
 
-    void ajouterCartes(Carte* carte){
-        this -> paquetCarte.push_back(carte);
+    void ajouterCartes(Carte *carte) {
+        this->paquetCarte.push_back(carte);
     }
     /*
     void retirerCarte(){
@@ -94,21 +101,21 @@ public:
         }
     }*/
 
-    void creerCarte(){
-        for(int i = 1; i <= 13; i++) {
-            Carte* carteTrefle = new Carte(i, "trefle", "noir");
-            this ->ajouterCartes(carteTrefle);
-            Carte* cartePique = new Carte(i, "pique", "noir");
-            this ->ajouterCartes(cartePique);
-            Carte* carteCaro = new Carte(i, "carreau", "rouge");
+    void creerCarte() {
+        for (int i = 1; i <= 13; i++) {
+            Carte *carteTrefle = new Carte(i, "trefle", "noir");
+            this->ajouterCartes(carteTrefle);
+            Carte *cartePique = new Carte(i, "pique", "noir");
+            this->ajouterCartes(cartePique);
+            Carte *carteCaro = new Carte(i, "carreau", "rouge");
             this->ajouterCartes(carteCaro);
-            Carte* carteCoeur = new Carte(i, "coeur", "rouge");
-            this ->ajouterCartes(carteCoeur);
+            Carte *carteCoeur = new Carte(i, "coeur", "rouge");
+            this->ajouterCartes(carteCoeur);
         }
     }
 
-    void afficherPaquet(){
-        for(int i = 0; i < paquetCarte.size(); i++) {
+    void afficherPaquet() {
+        for (int i = 0; i < paquetCarte.size(); i++) {
             cout << i;
             paquetCarte[i]->afficher();
         }
@@ -121,12 +128,15 @@ public:
         this->afficherPaquet();
     }
 
+//    void RougeNoir(){
+//        if (paquetCarte.pop_back();) {
+//
+//        }
+//    };
 };
 
 int main() {
-    srand((unsigned)time(0));
-
-
+    srand((unsigned) time(0));
 
 
 
@@ -160,9 +170,19 @@ int main() {
     }
 */
 
-Purple* purple = new Purple;
-purple->creerCarte();
-purple->randomShuffleMarcheSTP();
+//    Purple *purple = new Purple;
+//    purple->creerCarte();
+//    purple->randomShuffleMarcheSTP();
+
+    string guess = "rouge";
+
+    Carte* carte = new Carte(8, "coeur", "rouge");
+
+    if (guess == carte->get_couleur()) {
+        cout << carte << endl;
+        cout << "gagné" << endl;
+    }
+
 
 
 
@@ -172,7 +192,7 @@ purple->randomShuffleMarcheSTP();
 
     Carte* carte = main_maitre->retirerCarte();
     table->ajouterCartes(carte);
-     Compare la carte avec la prédiction d jouer...
+    Compare la carte avec la prédiction d jouer...
 */
 
     return 0;
