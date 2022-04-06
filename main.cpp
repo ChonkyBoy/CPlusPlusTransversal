@@ -123,15 +123,13 @@ public:
 
 };
 
-class Choix {
-private:
-
-public:
-};
-
 int main() {
-
     srand((unsigned)time(0));
+
+
+
+
+
 /*
     Carte *asco = new Carte(1, "coeur", "rouge");
     Carte *deuxco = new Carte(2, "coeur", "rouge");
