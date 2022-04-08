@@ -18,9 +18,8 @@
 
 using namespace std;
 
-/*int shuffle(int r) {
-    return rand() % r;
-}*/
+
+/* ----- CLASS CRÉATION DE CRATE ----- */
 
 class Carte {
 private:
@@ -33,20 +32,21 @@ public:
         this->signe = signe;
         this->couleur = couleur;
     }
+
     int get_chiffre() { return this->chiffre; };
+
     void set_chiffre(int chiffre) { this->chiffre = chiffre; };
 
     string get_signe() { return this->signe; };
-    void set_signe(string signe) { this->signe = signe;};
+
+    void set_signe(string signe) { this->signe = signe; };
 
     string get_couleur() { return this->couleur; };
+
     void set_couleur(string couleur) { this->couleur = couleur; };
 
-    void toString(){
-        cout << this->signe << this->chiffre << this->couleur << endl;
-    }
 
-    void afficher() {
+    void toString() {
         if (chiffre == 13) {
             cout << "Voici les cartes :" << " roi" << " de " << this->signe << endl;
         } else if (chiffre == 12) {
@@ -61,7 +61,7 @@ public:
     }
 };
 
-
+/* ----- CLASS PURPLE - PAQUET DE CARTE ----- */
 
 class Purple {
 private:
@@ -117,7 +117,7 @@ public:
     void afficherPaquet() {
         for (int i = 0; i < paquetCarte.size(); i++) {
             cout << i;
-            paquetCarte[i]->afficher();
+            paquetCarte[i]->toString();
         }
     }
 
@@ -125,14 +125,75 @@ public:
         for (int i = 0; i < 52; i++) {
             swap(paquetCarte[i], paquetCarte[rand() % 52]);
         }
-        this->afficherPaquet();
+        //this->afficherPaquet();
     }
 
-//    void RougeNoir(){
-//        if (paquetCarte.pop_back();) {
-//
-//        }
-//    };
+    Carte *prendUneCarte() {
+        Carte *result = this->paquetCarte[paquetCarte.size() - 1];
+        this->paquetCarte.pop_back();
+        return result;
+    }
+};
+
+
+/* ----- CLASS JOUEUR ----- */
+
+class Joueur {
+private:
+    string nom;
+    int points;
+
+public:
+
+    Joueur(string nom, int points) {
+        this->nom = nom;
+        this->points = points;
+    }
+
+    string get_nom() { return this->nom; };
+
+    void set_nom(string nom) { this->nom = nom; };
+
+    int get_points() { return this->points; };
+
+    void set_points(int points) { this->points = points; };
+
+
+    int guessSTR() {
+        int guessSTR;
+        cout << "Joue: 1-rouge | 2-noir ";
+        cin >> guessSTR;
+        return guessSTR;
+    }
+
+    int guessINT() {
+        int guessINT;
+        cout << "Joue: + | -";
+        cin >> guessINT;
+        return guessINT;
+    }
+
+
+    int startingGuess() {
+        int userChoice;
+
+        cout
+                << "1- rouge ou noir | 2- + ou - | 3- purple (pas encore fonctionnel lol) | 4- stop (pour arreter tout le temps) :)"
+                << endl;
+        cin >> userChoice;
+        if (userChoice == 1) {
+            guessSTR();
+        } else if (userChoice == 2) {
+            guessINT();
+        } else if (userChoice == 3) {
+            // A FAIRIEIOZINJDSKFJDPJGDPJ
+        } else {
+            cout << "ok bye" << endl;
+        }
+        return userChoice;
+    }
+
+
 };
 
 int main() {
@@ -170,29 +231,38 @@ int main() {
     }
 */
 
-//    Purple *purple = new Purple;
-//    purple->creerCarte();
-//    purple->randomShuffleMarcheSTP();
+    Purple *purple = new Purple;
+    purple->creerCarte();
+    purple->randomShuffleMarcheSTP();
 
-    string guess = "rouge";
+    Joueur *joueur = new Joueur("Marin", 0);
 
-    Carte* carte = new Carte(8, "coeur", "rouge");
 
-    if (guess == carte->get_couleur()) {
-        cout << carte << endl;
-        cout << "gagné" << endl;
+    Carte *carte = purple->prendUneCarte();
+
+    while (joueur->startingGuess() != 4) {
+//        if (joueur->startingGuess() == joueur->guessSTR()) {
+        string carte_couleur;
+        if (joueur->guessSTR() == 1) { carte_couleur = "rouge"; } else { carte_couleur = "noir"; };
+        if (carte->get_couleur() == carte_couleur) {
+            cout << "t'as eu bon gros rat" << endl;
+            carte->toString();
+            return 0;
+        } else if (carte->get_chiffre() == joueur->guessINT()) {
+            cout << "t'as aussi eu bon rahh" << endl;
+            carte->toString();
+            return 0;
+        }
+
     }
 
-
-
-
 /*
-    Purple* main_maitre;
-    Purple* table;
+Purple* main_maitre;
+Purple* table;
 
-    Carte* carte = main_maitre->retirerCarte();
-    table->ajouterCartes(carte);
-    Compare la carte avec la prédiction d jouer...
+Carte* carte = main_maitre->retirerCarte();
+table->ajouterCartes(carte);
+Compare la carte avec la prédiction d jouer...
 */
 
     return 0;
