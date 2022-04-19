@@ -2,9 +2,10 @@
 #include <vector>
 #include <stdlib.h>
 #include <time.h>
-#include <bits/stdc++.h>
-#include <algorithm>
-#include <random>
+#include <string>
+#include <windows.h>
+
+// toutes mes libraires
 
 //Faire le paquet : OK
 //Mélanger le paquet : OK
